@@ -1,0 +1,16 @@
+image: "python:3.7"
+
+stages:
+  - deploy
+
+before_script:
+   - pip install wheel
+   - pip install twine
+   - python setup.py bdist_wheel
+
+deploy_private:
+  stage: deploy
+  script:
+    - twine upload --username hongkang --password ******** dist/* --repository-url http://**.**.**.**:31187/
+  only:
+    - tags
